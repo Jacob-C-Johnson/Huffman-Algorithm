@@ -90,7 +90,7 @@ def printNodes(node, val=''):
 chars = ['f', 'e', 'c', 'b', 'd', 'a']
 
 # frequency of characters
-freq = [0.1, 0.19, 0.12, 0.23, 0.16, 0.20]
+freq = [0.05, 0.09, 0.12, 0.13, 0.16, 0.45]
 
 # list containing unused nodes
 nodes = []
@@ -122,7 +122,7 @@ root_node = nodes[0]
 printNodes(root_node)
 
 # Example: Decoding a binary string
-binary_string = "010010110110011011011110111"
+binary_string = "110001001101"
 decoded_text = binarydecode(root_node, binary_string)
 print(f"\nDecoded Text: {decoded_text}")
 

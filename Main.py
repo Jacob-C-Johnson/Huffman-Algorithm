@@ -2,25 +2,27 @@
 import heapq
 import TreeMethods
 
+
 class node:
-	def __init__(self, freq, symbol, left=None, right=None):
-		# frequency of symbol
-		self.freq = freq
+    def __init__(self, freq, symbol, left=None, right=None):
+        # frequency of symbol
+        self.freq = freq
 
-		# symbol name (character)
-		self.symbol = symbol
+        # symbol name (character)
+        self.symbol = symbol
 
-		# node left of current node
-		self.left = left
+        # node left of current node
+        self.left = left
 
-		# node right of current node
-		self.right = right
+        # node right of current node
+        self.right = right
 
-		# tree direction (0/1)
-		self.huff = ''
+        # tree direction (0/1)
+        self.huff = ''
 
-	def __lt__(self, nxt):
-		return self.freq < nxt.freq
+    def __lt__(self, nxt):
+        return self.freq < nxt.freq
+
 
 # Function to encode a string using Huffman Tree nodes
 def encode(root, input_str):
@@ -42,6 +44,7 @@ def encode(root, input_str):
     for char in input_str:
         encoded_str += char_to_code_mapping[char]
     return encoded_str
+
 
 # new decode function that goes from binary to a word
 def binarydecode(root, binary_str):
@@ -65,21 +68,21 @@ def binarydecode(root, binary_str):
 # codes for all symbols in the newly
 # created Huffman tree
 def printNodes(node, val=''):
+    # huffman code for current node
+    newVal = val + str(node.huff)
 
-	# huffman code for current node
-	newVal = val + str(node.huff)
+    # if node is not an edge node
+    # then traverse inside it
+    if (node.left):
+        printNodes(node.left, newVal)
+    if (node.right):
+        printNodes(node.right, newVal)
 
-	# if node is not an edge node
-	# then traverse inside it
-	if(node.left):
-		printNodes(node.left, newVal)
-	if(node.right):
-		printNodes(node.right, newVal)
+    # if node is edge node then
+    # display its huffman code
+    if (not node.left and not node.right):
+        print(f"{node.symbol} -> {newVal}")
 
-		# if node is edge node then
-		# display its huffman code
-	if(not node.left and not node.right):
-		print(f"{node.symbol} -> {newVal}")
 
 # # characters for huffman tree
 # chars = ['F', 'E', 'C', 'B', 'D', 'A']
@@ -89,25 +92,24 @@ def printNodes(node, val=''):
 
 # characters for huffman tree
 chars = []
-
 # frequency of characters
 freq = []
-
 with open("dataTeamX.txt", "r") as file:
     for line in file:
         entry = line.split()
         chars.append(entry[0])
         freq.append(float(entry[1]))
 file.close()
-print("Chars:",chars)
-print("Frequency:",freq)
+print("Chars:", chars)
+print("Frequency:", freq)
+
 # list containing unused nodes
 nodes = []
 
 # converting characters and frequencies
 # into huffman tree nodes
 for x in range(len(chars)):
-	heapq.heappush(nodes, node(freq[x], chars[x]))
+    heapq.heappush(nodes, node(freq[x], chars[x]))
 
 while len(nodes) > 1:
     # sort all the nodes in ascending order
@@ -121,10 +123,9 @@ while len(nodes) > 1:
 
     # combine the 2 smallest nodes to create
     # new node as their parent
-    newNode = node(left.freq+right.freq, left.symbol+right.symbol, left, right)
+    newNode = node(left.freq + right.freq, left.symbol + right.symbol, left, right)
 
     heapq.heappush(nodes, newNode)
-
 
 # Huffman Tree is ready!
 root_node = nodes[0]

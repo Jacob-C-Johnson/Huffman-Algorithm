@@ -1,5 +1,6 @@
 # A Huffman Tree Node
 import heapq
+import TreeMethods
 
 class node:
 	def __init__(self, freq, symbol, left=None, right=None):
@@ -29,21 +30,17 @@ def encode(root, input_str):
     # Generate a mapping of characters to their Huffman codes
     def generate_mapping(node, val=''):
         newVal = val + str(node.huff)
-
         if node.left:
             generate_mapping(node.left, newVal)
         if node.right:
             generate_mapping(node.right, newVal)
-
         if not node.left and not node.right:
             char_to_code_mapping[node.symbol] = newVal
 
     generate_mapping(root)
-
     # Encode the input string using the generated mapping
     for char in input_str:
         encoded_str += char_to_code_mapping[char]
-
     return encoded_str
 
 # new decode function that goes from binary to a word
@@ -61,7 +58,6 @@ def binarydecode(root, binary_str):
         if not current_node.left and not current_node.right:
             decoded_str += current_node.symbol
             current_node = root  # Reset to the root for the next iteration
-
     return decoded_str
 
 
@@ -85,13 +81,26 @@ def printNodes(node, val=''):
 	if(not node.left and not node.right):
 		print(f"{node.symbol} -> {newVal}")
 
+# # characters for huffman tree
+# chars = ['F', 'E', 'C', 'B', 'D', 'A']
+#
+# # frequency of characters
+# freq = [0.05, 0.09, 0.12, 0.13, 0.16, 0.45]
 
 # characters for huffman tree
-chars = ['f', 'e', 'c', 'b', 'd', 'a']
+chars = []
 
 # frequency of characters
-freq = [0.05, 0.09, 0.12, 0.13, 0.16, 0.45]
+freq = []
 
+with open("dataTeamX.txt", "r") as file:
+    for line in file:
+        entry = line.split()
+        chars.append(entry[0])
+        freq.append(float(entry[1]))
+file.close()
+print("Chars:",chars)
+print("Frequency:",freq)
 # list containing unused nodes
 nodes = []
 
@@ -127,7 +136,7 @@ decoded_text = binarydecode(root_node, binary_string)
 print(f"\nDecoded Text: {decoded_text}")
 
 # Example: Encoding to a binary string
-input_string = "ffddcccde"
+input_string = "FACE"
 encoded_text = encode(root_node, input_string)
 print(f"\nEncoded Text: {encoded_text}")
 

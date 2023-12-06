@@ -11,7 +11,7 @@ freq = []
 with open("dataTeamX.txt", "r") as file:
     for line in file:
         entry = line.split()
-        chars.append(entry[0])
+        chars.append(entry[0].upper())
         freq.append(float(entry[1]))
 file.close()
 print("Chars:", chars)
@@ -19,15 +19,14 @@ print("Frequency:", freq)
 
 tm.makeTree(nodes, chars, freq)
 
-# Example: Decoding a binary string
-binary_string = "110001001101"
-decoded_text = tm.binarydecode(nodes[0], binary_string)
-print(f"\nDecoded Text: {decoded_text}")
+with open("binaryStrings.txt","r") as bin:
+    for line in bin:
+        binary_string = line
+        decoded_text = tm.binarydecode(nodes[0], binary_string)
+        print(f"Decoded Text: {decoded_text}")
 
-# Example: Encoding to a binary string
-input_string = "FACE"
-encoded_text = tm.encode(nodes[0], input_string)
-print(f"\nEncoded Text: {encoded_text}")
-
-if binary_string == encoded_text:
-    print("Success")
+with open("letterStrings.txt","r") as bin:
+    for line in bin:
+        input_string = line.upper()
+        encoded_text = tm.encode(nodes[0], input_string)
+        print(f"Encoded Text: {encoded_text}")

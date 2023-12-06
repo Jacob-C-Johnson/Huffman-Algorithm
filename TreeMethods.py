@@ -1,3 +1,5 @@
+# Huffman tree build and methods provided by geeks for geeks examples
+# Encode and Decode methods engineered using chat gpt
 import heapq
 class node:
     def __init__(self, freq, symbol, left=None, right=None):

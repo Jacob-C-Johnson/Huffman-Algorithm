@@ -1,5 +1,3 @@
-# A Huffman Tree Node
-import heapq
 import TreeMethods as tm
 
 # list containing unused nodes

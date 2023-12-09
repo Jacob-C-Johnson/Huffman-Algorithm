@@ -1,6 +1,7 @@
 # Huffman tree build and methods provided by geeks for geeks examples
 # Encode and Decode methods engineered using chat gpt
 import heapq
+# class for each node on the tree
 class node:
     def __init__(self, freq, symbol, left=None, right=None):
         # frequency of symbol

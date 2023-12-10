@@ -1,3 +1,6 @@
+# Jacob Johnson and Owen Rushchel
+# Huffman tree build and methods provided by geeks for geeks examples
+# Encode and Decode methods engineered using chat gpt
 import TreeMethods as tm
 
 # list containing unused nodes
